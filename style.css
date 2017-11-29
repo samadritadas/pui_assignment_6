@@ -1,0 +1,195 @@
+.logo{
+	font-family: Proxima Nova ;
+	font-weight: 2em;
+	/*color: #f33232;*/
+	color: black;
+	text-align: center;
+	font-size: 24px;
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+.cover{
+
+background: #ffe200; /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #ffe200,#fdeb5c);  /* Chrome 10-25, Safari 5.1-6 */
+/*background: linear-gradient(to bottom, #ffe200,#fdeb5c);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background:linear-gradient(to bottom, #610bb7,#7f00ff);
+
+	/*background-color: #ffe200;*/
+}
+
+body{
+	margin: 0px;
+}
+
+
+
+/*input[type="checkbox"] {
+	content: "\f006";
+   color:#f9540f;
+	margin: 15px;
+}
+
+.check {
+	font-family: FontAwesome;
+	display: inline;
+	color:#f9540f;
+	content: "\f006";
+}
+
+.check:hover{
+	color:#f9540f;
+	font-family: FontAwesome;;
+	content: "\f005";
+}
+.check.checked{
+    color:#f9540f;
+	font-family: FontAwesome;;
+	content: "\f005";
+}*/
+
+
+
+
+
+
+
+input[type="checkbox"] {
+	margin: 450px;
+    position: absolute;
+    margin-left: -9999px;
+}
+
+.check.check:before  {
+   font-family: FontAwesome;
+    content: "\f006";
+    position: relative;
+    font-size: 16px;
+    margin: 12px 15px;
+    line-height: 16px;
+    z-index: 999;
+    color: #ff6200;
+ }
+
+ .check:hover {
+
+ 	cursor: pointer;
+ 	 position: relative;
+   font-family: FontAwesome;
+     content: "\f005";
+     line-height: 18px;
+   font-size: 16px;
+    z-index: 999;
+   
+}
+
+
+.check.checked:after {
+
+  font-family: FontAwesome;
+    content: "\f005";
+    position: relative;
+    font-size: 16px;
+   margin: 12px -30px;
+    line-height: 16px;
+  
+    z-index: 999;
+    color: #ff6200;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+section{
+	text-align: center;
+	padding-bottom: 5%;
+
+	
+}
+
+#resume-heading{
+
+	margin-top: 4%;
+	font-family: Proxima Nova;
+	font-weight: 100px;
+	font-size: 18px;
+    color: #cccccc;
+}
+
+.bkmark
+{    
+	margin-top: 4%;
+	font-family: Proxima Nova;
+	font-weight: 100px;
+	font-size: 18px;
+	color: #cccccc
+	font-style:italic;
+}
+
+.new-resume-heading{
+	margin-top: 4%;
+	font-family: Proxima Nova;
+	font-size: 18px;
+	color: black;
+	font-style: normal;
+}
+@media (min-width:790px){
+ul {
+    /*padding: 0px 450px;*/
+    padding: 0px 30%;
+    list-style-type: circle;
+}}
+
+@media (min-width:450px) and (max-width: 790px){
+ul {
+    padding: 0px 100px;
+    list-style-type: circle;
+}}
+
+
+ul {
+    list-style-type: circle;
+}
+
+
+.liClass{
+	line-height: 2em;
+	text-align: left;
+    padding: 10px;
+    list-style-type: circle;
+    color: black;
+    font-family: open sans;
+    font-size: 14px;
+}
+
+
+.description{
+	padding: 0px 10%;
+	font-family: Open sans;
+	font-style: normal;
+	font-size: 14px;
+	line-height: 2em;
+	color: #888686;
+}
+
+
+
+.iot{
+    width: 232px;
+    height: 236px;
+}
+
+
+
