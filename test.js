@@ -1,30 +1,6 @@
 $(document).ready(function(){
-    var notes= JSON.parse(localStorage.getItem("resume"));
-
-  
-    if(notes.length>0) 
-    {
-    document.getElementById("resume-heading").innerHTML= "<span class='new-resume-heading'>NOTES<span>"
-    var listElement=document.createElement("ul"); 
-        //listElement.id= "ullist";
-        listElement.setAttribute("id","ullist");
-        document.getElementById("resume-heading").appendChild(listElement); 
-
-        for(var i=0; i<notes.length; i++){
-        var liItem=document.createElement("li");
-        //liItem.className="liClass";
-        liItem.setAttribute("class","liClass");
-        liItem.appendChild(document.createTextNode(notes[i]));
-        listElement.appendChild(liItem);
-    }
-
-  }
-  else {
-     document.getElementById("resume-heading").innerHTML= " <h2 class ='bkmark'>Bookmark messages that you wish to make a note of<h2>"
-  }
-
-  $('.drawer').drawer();
-
+   
+ //Initiating the drawer
   $('.drawer').drawer({
     class: {
       nav: 'drawer-nav',
@@ -41,6 +17,30 @@ $(document).ready(function(){
     showOverlay: true
   });
 
+
+
+
+var notes= JSON.parse(localStorage.getItem("resume"));
+
+//To ensure the the bookmarked notes are saved
+if(notes!=null && notes.length>0 ) 
+    {
+    document.getElementById("resume-heading").innerHTML= "<span class='new-resume-heading'>NOTES<span>"
+    var listElement=document.createElement("ul"); 
+    listElement.setAttribute("id","ullist");
+    document.getElementById("resume-heading").appendChild(listElement); 
+
+    for(var i=0; i<notes.length; i++){
+    var liItem=document.createElement("li");
+    liItem.setAttribute("class","liClass");
+    liItem.appendChild(document.createTextNode(notes[i]));
+    listElement.appendChild(liItem);
+    }
+
+  }
+  else {
+     document.getElementById("resume-heading").innerHTML= " <h2 class ='bkmark'>Bookmark messages that you wish to make a note of<h2>"
+  }
 
  }); 
 
@@ -98,7 +98,6 @@ var botui = new BotUI('hello-world');
   }).then(function () {
 
             return botui.action.button({ 
-            delay: 1000,
             action: [
               {
                 text: 'Okay! Got it',
@@ -116,7 +115,7 @@ var botui = new BotUI('hello-world');
         if(res.value == 'reach_out') {
           return botui.message.bot({ 
            delay: 1000, 
-           content: 'Shoot me a mail at samadrid@andrew.cmu.edu or connect to me https://www.linkedin.com/in/samadrita-das', 
+           content: 'Shoot me a mail at samadrid@andrew.cmu.edu', 
 
             }).then(function(index){
                      setTimeout(showBookmark(index),1500);   
@@ -143,29 +142,79 @@ var botui = new BotUI('hello-world');
                       
                     },
                     {
-                      text: 'Tell me about your work',
+                      text: 'Where have you worked',
                       value: 'work_ex'
                      
                     }
                   ]
                 });
             }).then(function (res) {
-               if(res.value == 'work_ex') {
+               if(res.value == 'work_ex') 
+               {
                   botui.message.bot({ 
                   delay: 1000,
-                  content: 'Prior to CMU, I was working as a Product designer at Practo, a leading healthcare startup in India.'
+                  content: 'Prior to CMU, I was working as a Product designer at Practo, a leading healthcare startup in India. As part of the book team, I was responsible for the booking experience of the patients in the Prato platform.'
                   }).then(function(index){
                       setTimeout(showBookmark(index),1500);   
                       }).then(function(){
                           botui.message.bot({ 
                             delay: 1000,
-                            content: 'I have also worked as a User experience researcher and solid understanding of conceptualising and designing of end to end user experience'
+                            content: 'In the summer of 2015, I interned as a UX designer at Amazon India where I was responsible for redesigning the detail page for amazon mobile app'
                             });
-                          }).then(function(index){
-                              setTimeout(showBookmark(index),1500);   
-                              });
-                     }
-                
+                      }).then(function(){
+                           botui.message.bot({ 
+                            delay: 1000,
+                           content: 'I have also worked as a research associate at Embedded Interactions lab and worked with Samsung over a year to design accessibility features for their flagship models'
+                          });
+                      }).then(function () {
+                         return botui.action.button({ // let user do something
+                         delay: 1000,
+                         action: [
+                                { 
+                                  text: 'Tell me more',
+                                  value: 'more'
+                                  
+                                },
+                                {
+                                  text: 'How can I reach out to you?',
+                                  value: 'reach_out'
+                                 
+                                }
+                              ]
+                            });
+                          }).then(function (res) {
+                                if(res.value == 'more') {
+                                  return botui.message.bot({ 
+                                   delay: 1000, 
+                                   content: 'While these experiences have helped me consolidate my learning of Human-centric Design processes they have also made me aware of the intricacies involved in developing products and services which are shippable to the commercial market', 
+                                    }).then(function(index){
+                                    setTimeout(showBookmark(index),1500);   
+
+                                    }).then(function (){
+                                    return botui.message.bot({ 
+                                    delay: 1000,
+                                    content: 'What else do you want to talk about? Select it from the menu on the left' ,
+                                     });
+                                    }); 
+                                  }
+
+                                else{
+                                  return botui.message.bot({ 
+                                  delay: 1000, 
+                                  content: 'Shoot me a mail at samadrid@andrew.cmu.edu', 
+                                  }).then(function(index){
+                                     setTimeout(showBookmark(index),1500);   
+                                  }).then(function (){
+                                     return botui.message.bot({ 
+                                      delay: 1000,
+                                      content: 'Alternatively if you are in Pittsburgh, I am always down for coffee ☕' ,
+                                      });
+                                  }); 
+
+                                }
+                            }); 
+                }   
+                                         
                 else{
                       return botui.message.bot({ 
                         // show first message
@@ -188,10 +237,11 @@ var botui = new BotUI('hello-world');
                       }).then(function(index){
                       setTimeout(showBookmark(index),1500);   
                       });
-                     }
-                 });
-      }
-      });
+                }
+            });
+        }
+
+     }); 
 
 
 
@@ -257,24 +307,32 @@ var skills = function(){
     delay: 1000,
     content: 'I have hands-on experience with both conducting UX research as well designing user interfaces.'
     });
+  }).then(function(index){
+    setTimeout(showBookmark(index),1500);   
   }).then(function(){
     botui.message.bot({ 
     // show first message
     delay: 1000,
     content: 'Proficient in Sketch, Adobe Photoshop, Adobe Illustrator, Adobe Indesign and Principle'
     });
+  }).then(function(index){
+    setTimeout(showBookmark(index),1500);   
   }).then(function(){
     botui.message.bot({ 
     // show first message
     delay: 1000,
     content: 'Comfortable with HTML, CSS, Javascript, Jquery, C++/C'
     });
+  }).then(function(index){
+    setTimeout(showBookmark(index),1500);   
   }).then(function(){
     botui.message.bot({ 
     // show first message
     delay: 1000,
     content: 'Occasionally tinker with arduino and sensors to build interactive prototypes '
     });
+  }).then(function(index){
+    setTimeout(showBookmark(index),1500);   
   });
 
 }
@@ -340,27 +398,24 @@ var journey = function(){
 }
 
 
-var experience = function(){
-  
-    botui.message.bot({ 
+var experience = function(){ 
+  botui.message.bot({ 
       human: true,
       delay: 1000,
       content: 'Tell me about your work experience'
     }).then(function(){
         return botui.message.bot({ 
         delay: 1000,
-        content: 'Prior to CMU, I was working as a Product designer at Practo, a leading healthcare startup in India.'
+        content: 'Prior to CMU, I was working as a Product designer at Practo, a leading healthcare startup in India. As part of the book team, I was responsible for the booking experience of the patients in the Prato platform.'
         });
     }).then(function(index){
-       setTimeout(showBookmark(index),1500);   
+    setTimeout(showBookmark(index),1500);   
     }).then(function(){
-        botui.message.bot({ 
-        delay: 1000,
-        content: 'I have also worked as a User experience researcher and solid understanding of conceptualising and designing of end to end user experience'
-        });
-    }).then(function(index){
-     setTimeout(showBookmark(index),1500);   
-    });
+       botui.message.bot({ 
+       delay: 1000,
+       content: 'In the summer of 2015, I interned as a UX designer at Amazon India where I was responsible for redesigning the detail page for amazon mobile app'
+       });
+    });  
 
 }
 
@@ -678,6 +733,17 @@ var deleteListItem = function(text,msgno){
       }
  
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
